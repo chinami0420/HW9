@@ -1,154 +1,70 @@
-var inq = require("inquirer");
-var axios = require("axios");
-var fs = require("fs");
-var template = require("./template");
+const inquirer = require("inquirer");
+const fs = require("fs");
+const axios = require("axios");
 
-// inq
-//   .prompt([
-//     {
-//       type: "input",
-//       name: "q1",
-//       message: "Enter your Github Username",
-//     },
-//   ])
-//   .then(function (answers) {
-//     return axios.get("https://api.github.com/users/" + answers.q1);
-//   })
-//   .then(function (response) {
-//     var mdFile = response;
-//     console.log(mdFile);
+inquirer
+  .prompt([
+    {
+      type: "input",
+      message: "What is your GitHub user name?",
+      name: "user",
+    },
+    {
+      type: "input",
+      message: "What is your project's name?",
+      name: "project",
+    },
+    {
+      type: "input",
+      message: "Please write a short description of your project.",
+      name: "description",
+    },
+    {
+      type: "input",
+      messgae: "What kind of licsense should your project have?",
+      name: "license",
+    },
+    {
+      type: "input",
+      message: "What command should be run to install dependencies?",
+      name: "dependencies",
+    },
+    {
+      type: "input",
+      message: "What does the user need to know about using the repo?",
+      name: "about",
+    },
+  ])
+  .then(function (response) {
+    const api = `https://api.github.com/users/${response.user}`;
+    axios.get(api).then(function () {
+      const data = `
+# ${response.project}
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+## Description
+${response.description}
+## Table of Contents
+* [Installation](#Installation)
+* [Usage](#Usage)
+* [License](#License)
+* [Contributing](#Contributing)
+* [Questions](#Questions)
+## Installation
+To install necessary dependencies, run the following command:
+${response.dependencies}
+## Usage
+${response.about}
+## License
+${response.license}
+## Contributing
+${response.test}
+## Questions
 
-//     mdFile = "# Readme for Github Username: " + response.data.login + template;
-//     fs.writeFile("./README.md", mdFile, function () {
-//       console.log("readme created!");
-//     });
-//   });
+--
+If you have any questions about the repo, please contact me at github.com/${response.user} or tajohnsonn@gmail.com.`;
 
-async function getUserInfo() {
-  let { projName } = await inquirer.prompt({
-    messgae: "what is your project's name?",
-    name: "projName",
-    type: "input",
-  });
-
-  let { projDescription } = await inquirer.prompt({
-    message: "Please provide a short description of your project",
-    name: "projDescription",
-    type: "input",
-  });
-
-  let { install } = await inquirer.prompt({
-    message: "What should the user do to install the app?",
-    name: "install",
-    type: "input",
-  });
-
-  let { usage } = await inquirer.prompt({
-    message: "What should the user know before using the app?",
-    name: "usage",
-    type: "input",
-  });
-
-  let { projLicense } = await inquirer.prompt({
-    message: "What kind of license should your project have?",
-    name: "projLicense",
-    type: "input",
-  });
-
-  let { dependencies } = await inquirer.prompt({
-    message: "Does the user need to install any deoendencies?",
-    name: "dependencies",
-    type: "input",
-  });
-
-  let { tests } = await inquirer.prompt({
-    message: "What coomand should be run to run tests?",
-    name: "tests",
-    type: "input",
-  });
-  // let { image } = await inquirer.prompt({
-  //   message: "What's your linkedIn?",
-  //   name: "image",
-  //   type: "input"
-  // });
-
-  inquirer
-    .prompt({
-      message: "Enter your GitHub username:",
-      name: "userName",
-    })
-    .then(function ({ userName }) {
-      const queryUrl = `https://api.github.com/users/${userName}/repos?per_page=100`;
-
-      axios.get(queryUrl).then(function (res) {
-        const image = res.data[0].owner.avatar_url;
-        createReadMe(
-          userName,
-          projName,
-          projDescription,
-          install,
-          usage,
-          projLicense,
-          dependencies,
-          tests,
-          image
-        );
+      fs.writeFile("ReadMe.md", data, function () {
+        console.log("Successfully wrote to ReadMe.md!");
       });
     });
-}
-
-// function createReadMe(
-//   userName,
-//   projName,
-//   projDescription,
-//   install,
-//   usage,
-//   projLicense,
-//   dependencies,
-//   tests,
-//   image
-// ) {
-//   let userInfo = `
-//   # ${projName}
-//     \n \n [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-//   \n \n ## Description \n \n
-//   ${projDescription} \n \n
-//   ## Table of Contents
-
-//   \*[Installations](#instalations)
-
-//   \*[Usage](#usage)
-
-//   \*[Dependencies](#dependencies)
-
-//   \*[Tests](#tests)
-
-//   \*[Questions](#questions)\n
-
-//   ## Installation
-//   ${install}
-
-//   ## Usage
-//   ${usage}
-//   ## Dependencies
-//   ${dependencies}
-
-//   ## License
-//   ${projLicense}
-//   ## Tests
-//   ${tests}
-
-//   ## Questions
-
-//   ![Markdown Logo](${image})
-
-//   If you have questions, please contact me via
-//   [GitHub](https//:github.com/${userName} "GitHub")`;
-
-//   fs.writeFile("README.md", userInfo, function(err) {
-//     if (err) throw err;
-//     console.log("File Created!");
-//   });
-// }
-
-getUserInfo();
+  });
