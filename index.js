@@ -29,11 +29,6 @@ inquirer
       message: "What command should be run to install dependencies?",
       name: "dependencies",
     },
-    {
-      type: "input",
-      message: "What does the user need to know about using the repo?",
-      name: "about",
-    },
   ])
   .then(function (response) {
     const api = `https://api.github.com/users/${response.user}`;
@@ -59,6 +54,7 @@ ${response.license}
 ## Contributing
 ${response.test}
 ## Questions
+
 
 --
 If you have any questions about the repo, please contact me at github.com/${response.user} or tajohnsonn@gmail.com.`;
