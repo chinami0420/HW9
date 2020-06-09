@@ -37,9 +37,5 @@ undefined
 ## Questions
 
 --
-If you have any questions about the repo, please contact me at github.com/chinami or chinami0420unno@yahoo.co.jp
+If you have any questions about the repo, please contact me at github.com/chinami0420 or chinami0420unno@yahoo.co.jp
 =======
-
-# HW9
-
-> > > > > > > eb429d75b4f9dd91b9b5dc382317a99ae87cefe6
