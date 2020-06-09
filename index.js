@@ -57,7 +57,7 @@ ${response.test}
 
 
 --
-If you have any questions about the repo, please contact me at github.com/${response.user} or tajohnsonn@gmail.com.`;
+If you have any questions about the repo, please contact me at github.com/${response.user} or chinami0420unno@yahoo.co.jp`;
 
       fs.writeFile("ReadMe.md", data, function () {
         console.log("Successfully wrote to ReadMe.md!");
