@@ -22,4 +22,4 @@ undefined
 
 
 --
-If you have any questions about the repo, please contact me at github.com/chinami or tajohnsonn@gmail.com.
+If you have any questions about the repo, please contact me at github.com/chinami0420 or chinami0420unno@yahoo.co.jp
