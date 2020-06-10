@@ -5,19 +5,21 @@
 generator
 ## Table of Contents
 * [Installation](#Installation)
-* [Usage](#Usage)
 * [License](#License)
 * [Contributing](#Contributing)
+* [Tests](#Tests)
 * [Questions](#Questions)
 ## Installation
 To install necessary dependencies, run the following command:
 npm i
 ## Usage
-undefined
+generator
 ## License
 1234
 ## Contributing
-undefined
+node
+## Tests
+none
 ## Questions
 
 

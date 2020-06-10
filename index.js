@@ -26,8 +26,18 @@ inquirer
     },
     {
       type: "input",
+      message: "What test did you use for your app?",
+      name: "tests",
+    },
+    {
+      type: "input",
       message: "What command should be run to install dependencies?",
       name: "dependencies",
+    },
+    {
+      type: "input",
+      message: "What question are you trying to ask?",
+      name: "questions",
     },
   ])
   .then(function (response) {
@@ -40,19 +50,21 @@ inquirer
 ${response.description}
 ## Table of Contents
 * [Installation](#Installation)
-* [Usage](#Usage)
 * [License](#License)
 * [Contributing](#Contributing)
+* [Tests](#Tests)
 * [Questions](#Questions)
 ## Installation
 To install necessary dependencies, run the following command:
 ${response.dependencies}
 ## Usage
-${response.about}
+${response.description}
 ## License
 ${response.license}
 ## Contributing
-${response.test}
+${response.tests}
+## Tests
+${response.questions}
 ## Questions
 
 
